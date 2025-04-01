@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Types.ObjectId;
+mongoose.set('strictPopulate', false);
 
 const userSchema = new Schema({
     name: {
@@ -61,7 +62,7 @@ const productSchema = new Schema({
             quantity: { type: Number, required: true },
             price: { type: Number, required: true }
         }],
-        totalAmount: { type: Number, required: true },
+        totalAmount: { type: Number, required: true, default : 0 },
         status: { type: String, enum: ["Pending", "Shipped", "Delivered", "Cancelled"], default: "Pending" },
         paymentStatus: { type: String, enum: ["Pending", "Completed", "Failed"], default: "Pending" },
         orderDate: { type: Date, default: Date.now }

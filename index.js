@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-const mongoose = require('mongoose');  
 require('dotenv').config();
+const config = require('./config');
+const mongoose = require('mongoose');  
 app.use(express.json());  
 
 const adminRouter = require('./Routes/admin');
