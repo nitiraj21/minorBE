@@ -14,6 +14,11 @@ router.post("/register", async(req, res) =>{
     try{
         const {name, email, password,} = req.body;
 
+        const existingAdmin = await adminModel.findOne({ email });
+        if (existingAdmin) {
+            return res.status(400).json({ error: "Admin already exists with this email" });
+        }
+
         const hashed = await bcrypt.hash(password, 10);
 
         const newAdmin = new adminModel({
@@ -63,21 +68,23 @@ router.post("/add-product", authenticateAdmin, async(req, res) =>{
 });
 
 
-router.post("/update-product/:id", authenticateAdmin, async(req, res) =>{
-    try{
-        const { name, brand, price, type, specs,stock, image  } = req.body;
-        const product = await productModel.findById(id);
-        if(!product) return res.status(404).json({error : "Product not found"});
-        product  = await productModel.updateOne({
-            _id : id
-        },{
-            title
-        })
+router.put("/update-product/:id", authenticateAdmin, async(req, res) => {
+    try {
+        const { id } = req.params;
+        const updates = req.body;
         
-
-    }
-    catch(erro){
-        res.status(400).json({error : error.message});
+        const product = await productModel.findById(id);
+        if (!product) return res.status(404).json({ error: "Product not found" });
+        
+        const updatedProduct = await productModel.findByIdAndUpdate(
+            id,
+            { $set: updates },
+            { new: true }
+        );
+        
+        res.status(200).json(updatedProduct);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
     }
 });
 
@@ -93,8 +100,8 @@ router.get("/products", authenticateAdmin, async (req, res) => {
 
 router.post("/delete-product/:id", authenticateAdmin, async (req, res) => {
     try {
-        const { name } = req.params;
-        const product = await productModel.findOne({name});
+        const { id } = req.params;
+        const product = await productModel.findOne({id});
         if (!product) return res.status(404).json({ error: "Product not found" });
 
         await productModel.deleteOne({ name });
@@ -104,5 +111,42 @@ router.post("/delete-product/:id", authenticateAdmin, async (req, res) => {
     }
 }
 );
+
+router.get("/orders", authenticateAdmin, async (req, res) => {
+    try {
+        const orders = await purchaseModel.find()
+            .populate('userId', 'name email')
+            .populate('products.productId');
+        res.json(orders);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+
+router.put("/order-status/:id", authenticateAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { status } = req.body;
+        
+        if (!['Pending', 'Shipped', 'Delivered', 'Cancelled'].includes(status)) {
+            return res.status(400).json({ error: "Invalid status" });
+        }
+        
+        const order = await purchaseModel.findByIdAndUpdate(
+            id,
+            { status },
+            { new: true }
+        ).populate('products.productId');
+        
+        if (!order) {
+            return res.status(404).json({ error: "Order not found" });
+        }
+        
+        res.json(order);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
 module.exports = router;

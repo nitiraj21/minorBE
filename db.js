@@ -11,7 +11,8 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     password: {
         type: String,
@@ -34,7 +35,8 @@ const adminSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique : true
     },
     password: {
         type: String,
@@ -47,11 +49,25 @@ const productSchema = new Schema({
     brand: { type: String, required: true },
     price: { type: Number, required: true },
     type: { type: String, enum: ["CPU", "GPU", "RAM", "Storage", "Motherboard", "Keyboard", "Mouse", "Monitor", "Cabinet", "Others"], required: true },
-    specs: { type: String },
+    sspecs: { 
+        processor: String,
+        cores: Number,
+        memory: String,
+        storage: String,
+        dimensions: String,
+        weight: String,
+        wattage: Number,
+        additionalDetails: String
+    },
     stock: { type: Number, default: 0 },
     image : [{type : String}],
-    reviews: [{ type: String }],
-    ratings: [{ type: Number }]
+    reviews: [{ 
+        userId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+        comment: { type: String },
+        rating: { type: Number, min: 1, max: 5 },
+        date: { type: Date, default: Date.now }
+    }],
+    averageRating: { type: Number, default: 0 }
     });
 
 
@@ -65,13 +81,23 @@ const productSchema = new Schema({
         totalAmount: { type: Number, required: true, default : 0 },
         status: { type: String, enum: ["Pending", "Shipped", "Delivered", "Cancelled"], default: "Pending" },
         paymentStatus: { type: String, enum: ["Pending", "Completed", "Failed"], default: "Pending" },
-        orderDate: { type: Date, default: Date.now }
+        orderDate: { type: Date, default: Date.now },
+        shippingAddress: {
+            address: { type: String },
+            city: { type: String },
+            state: { type: String },
+            pincode: { type: Number },
+            country: { type: String }
+        },
+        razorpayOrderId: { type: String },
+        razorpayPaymentId: { type: String },
+        razorpaySignature: { type: String }
     });
     
 
 const cartSchema = new Schema({
     userId: { type: ObjectId, ref: "User", required: true },
-    products: [
+    items: [
         {
             productId: { type: ObjectId, ref: "Products", required: true },
             quantity: { type: Number, required: true, min: 1 }
@@ -79,16 +105,23 @@ const cartSchema = new Schema({
     ]
 }, { timestamps: true });
 
+const wishlistSchema = new Schema({
+    userId: { type: ObjectId, ref: "User", required: true },
+    products: [{ type: ObjectId, ref: "Products" }]
+}, { timestamps: true });
+
 const userModel = mongoose.model("User", userSchema);
 const adminModel = mongoose.model("Admin", adminSchema);
 const productModel = mongoose.model("Products", productSchema);
 const purchaseModel = mongoose.model("Purchases", purchaseSchema);
 const cartModel = mongoose.model("Cart", cartSchema);
+const wishlistModel = mongoose.model("Wishlist", wishlistSchema);
 
 module.exports= {
     userModel,
     adminModel,
     productModel,
     purchaseModel,
-    cartModel
+    cartModel,
+    wishlistModel
 };
