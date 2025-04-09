@@ -8,7 +8,7 @@ const router = express.Router();
 router.post("/add", authenticateUser, async (req, res) => {
     try {
         const { productId, quantity } = req.body;
-        const userId = req.user.id; 
+        const userId = req.user.id;
 
         
         const product = await productModel.findById(productId);
