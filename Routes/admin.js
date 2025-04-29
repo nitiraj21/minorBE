@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require('dotenv').config();
 const  { JWT_ADMIN_PASSWORD } = require("../config");
-const { adminModel, productModel } = require("../db");
+const { adminModel, productModel, purchaseModel, userModel } = require("../db");
 const { authenticateAdmin } = require("../AuthMiddleware/auth");
 
 
@@ -48,8 +48,7 @@ router.post("/login", async (req, res) =>{
         const isMatch = await bcrypt.compare(password, admin.password);
         if(!isMatch) return res.status(400).json({error : "invalid credentials"});
 
-        const token = jwt.sign({id : admin._id, isAdmin : true},JWT_ADMIN_PASSWORD);
-
+        const token = jwt.sign({id : admin._id, isAdmin : true}, JWT_ADMIN_PASSWORD);
         res.json({token});
     }
     catch(error){
@@ -59,10 +58,43 @@ router.post("/login", async (req, res) =>{
 
 router.post("/add-product", authenticateAdmin, async(req, res) =>{
     try {
-        const product = new productModel(req.body);
+        const { name, description, price, stock, category, type, brand, image, sspecs } = req.body;
+
+        // Validate required fields
+        if (!name || !description || !price || !stock || !category || !type || !brand || !image) {
+            return res.status(400).json({ error: "All fields are required" });
+        }
+
+        // Validate price and stock are numbers and positive
+        if (isNaN(price) || price < 0) {
+            return res.status(400).json({ error: "Price must be a positive number" });
+        }
+
+        if (isNaN(stock) || stock < 0) {
+            return res.status(400).json({ error: "Stock must be a positive number" });
+        }
+
+        // Validate image is an array
+        if (!Array.isArray(image)) {
+            return res.status(400).json({ error: "Image must be an array of strings" });
+        }
+
+        const product = new productModel({
+            name,
+            description,
+            price,
+            stock,
+            category,
+            type,
+            brand,
+            image,
+            sspecs
+        });
+
         await product.save();
         res.status(201).json(product);
     } catch (error) {
+        console.error('Error adding product:', error);
         res.status(400).json({ error: error.message });
     }
 });
@@ -98,19 +130,20 @@ router.get("/products", authenticateAdmin, async (req, res) => {
 }
 );
 
-router.post("/delete-product/:id", authenticateAdmin, async (req, res) => {
+router.delete("/delete-product/:id", authenticateAdmin, async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await productModel.findOne({id});
-        if (!product) return res.status(404).json({ error: "Product not found" });
+        const product = await productModel.findById(id);
+        if (!product) {
+            return res.status(404).json({ error: "Product not found" });
+        }
 
-        await productModel.deleteOne({ name });
+        await productModel.findByIdAndDelete(id);
         res.status(200).json({ message: "Product deleted successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
-}
-);
+});
 
 router.get("/orders", authenticateAdmin, async (req, res) => {
     try {
@@ -145,6 +178,35 @@ router.put("/order-status/:id", authenticateAdmin, async (req, res) => {
         
         res.json(order);
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.delete("/order/:id", authenticateAdmin, async (req, res) => {
+    try {
+        const { id } = req.params;
+        
+        // Check if order exists
+        const order = await purchaseModel.findById(id);
+        if (!order) {
+            return res.status(404).json({ error: "Order not found" });
+        }
+
+        // Delete the order
+        await purchaseModel.findByIdAndDelete(id);
+
+        // Remove order reference from user's orders array
+        await userModel.updateMany(
+            { orders: id },
+            { $pull: { orders: id } }
+        );
+
+        res.status(200).json({ 
+            success: true, 
+            message: "Order deleted successfully" 
+        });
+    } catch (error) {
+        console.error('Error deleting order:', error);
         res.status(500).json({ error: error.message });
     }
 });

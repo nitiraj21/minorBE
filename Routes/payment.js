@@ -1,111 +1,64 @@
 const express = require('express');
 const router = express.Router();
-const Razorpay = require('razorpay');
-const crypto = require('crypto');
-const { purchaseModel, cartModel, productModel, userModel } = require('../db');
 const { authenticateUser } = require('../AuthMiddleware/auth');
-require('dotenv').config();
+const { purchaseModel, userModel, cartModel, productModel } = require('../db');
 
-
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID,
-    key_secret: process.env.RAZORPAY_KEY_SECRET
-});
-
-
+// Create a new order
 router.post('/create-order', authenticateUser, async (req, res) => {
     try {
-        const { amount, currency } = req.body;
+        const { amount } = req.body;
+        const userId = req.user.id;
 
-        const options = {
-            amount: amount * 100, 
-            currency: 'INR',
-            receipt: crypto.randomBytes(16).toString('hex')
-        };
+        // Create a temporary order ID
+        const orderId = `ORDER-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-        const order = await razorpay.orders.create(options);
-        res.json(order);
+        res.json({
+            id: orderId,
+            amount,
+            currency: 'INR'
+        });
     } catch (error) {
         console.error('Error creating order:', error);
         res.status(500).json({ error: 'Internal server error' });
     }
 });
 
-router.post('/verify-payment', authenticateUser, async (req, res) => {
+// Place order with COD
+router.post('/place-order', authenticateUser, async (req, res) => {
     try {
-        const { 
-            razorpay_order_id, 
-            razorpay_payment_id, 
-            razorpay_signature,
-            shippingAddress 
-        } = req.body;
-        
+        const { orderId, paymentMethod, shippingAddress } = req.body;
         const userId = req.user.id;
 
-        // Verification
-        const body = razorpay_order_id + '|' + razorpay_payment_id;
-        const expectedSignature = crypto
-            .createHmac('sha256', process.env.RAZORPAY_KEY_SECRET)
-            .update(body.toString())
-            .digest('hex');
-
-        if (expectedSignature !== razorpay_signature) {
-            return res.status(400).json({ error: 'Invalid payment signature' });
-        }
-
-        // Get cart items
+        // Get user's cart with populated product details
         const cart = await cartModel.findOne({ userId }).populate('items.productId');
-        
-        if (!cart || !cart.items.length) {
-            return res.status(400).json({ error: 'Cart is empty' });
+        if (!cart) {
+            return res.status(404).json({ error: 'Cart not found' });
         }
 
-        // Calculate total and prepare purchase document
-        let totalAmount = 0;
-        const purchaseProducts = [];
+        // Prepare products array with prices
+        const products = cart.items.map(item => ({
+            productId: item.productId,
+            quantity: item.quantity,
+            price: item.productId.price
+        }));
 
-        for (const item of cart.items) {
-            const product = await productModel.findById(item.productId);
-            
-            if (!product) {
-                return res.status(404).json({ error: `Product not found: ${item.productId}` });
-            }
-            
-            if (product.stock < item.quantity) {
-                return res.status(400).json({ 
-                    error: `Not enough stock for product: ${product.name}` 
-                });
-            }
-            
-            // Update product stock
-            product.stock -= item.quantity;
-            await product.save();
-            
-            const itemTotal = product.price * item.quantity;
-            totalAmount += itemTotal;
-            
-            purchaseProducts.push({
-                productId: item.productId,
-                quantity: item.quantity,
-                price: product.price
-            });
-        }
+        // Calculate total amount
+        const totalAmount = products.reduce((total, item) => total + (item.price * item.quantity), 0);
 
         // Create purchase record
         const purchase = new purchaseModel({
             userId,
-            products: purchaseProducts,
+            products,
             totalAmount,
-            razorpayOrderId: razorpay_order_id,
-            razorpayPaymentId: razorpay_payment_id,
-            razorpaySignature: razorpay_signature,
-            paymentStatus: 'Completed',
+            paymentMethod,
+            paymentStatus: 'Pending',
+            status: 'Pending',
             shippingAddress
         });
         
         await purchase.save();
 
-
+        // Update user's orders
         await userModel.findByIdAndUpdate(userId, {
             $push: { orders: purchase._id }
         });
@@ -114,17 +67,22 @@ router.post('/verify-payment', authenticateUser, async (req, res) => {
         cart.items = [];
         await cart.save();
 
+        // Get the populated purchase for response
+        const populatedPurchase = await purchaseModel.findById(purchase._id)
+            .populate('products.productId');
+
         res.status(200).json({
             success: true,
-            message: 'Payment successful',
-            purchase
+            message: 'Order placed successfully',
+            purchase: populatedPurchase
         });
     } catch (error) {
-        console.error('Error verifying payment:', error);
+        console.error('Error placing order:', error);
         res.status(500).json({ error: error.message });
     }
 });
 
+// Get order details
 router.get('/order/:orderId', authenticateUser, async (req, res) => {
     try {
         const { orderId } = req.params;
@@ -141,6 +99,43 @@ router.get('/order/:orderId', authenticateUser, async (req, res) => {
 
         res.status(200).json({ purchase });
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Delete order (Admin only)
+router.delete('/order/:orderId', authenticateUser, async (req, res) => {
+    try {
+        const { orderId } = req.params;
+        const userId = req.user.id;
+
+        // Check if user is admin
+        const user = await userModel.findById(userId);
+        if (!user || !user.isAdmin) {
+            return res.status(403).json({ error: 'Unauthorized: Admin access required' });
+        }
+
+        // Check if order exists
+        const order = await purchaseModel.findById(orderId);
+        if (!order) {
+            return res.status(404).json({ error: 'Order not found' });
+        }
+
+        // Delete the order
+        await purchaseModel.findByIdAndDelete(orderId);
+
+        // Remove order reference from user's orders array
+        await userModel.updateMany(
+            { orders: orderId },
+            { $pull: { orders: orderId } }
+        );
+
+        res.status(200).json({ 
+            success: true, 
+            message: 'Order deleted successfully' 
+        });
+    } catch (error) {
+        console.error('Error deleting order:', error);
         res.status(500).json({ error: error.message });
     }
 });

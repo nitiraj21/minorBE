@@ -14,8 +14,9 @@ const productRouter = require('./Routes/products');
 const cartRouter = require('./Routes/cart');
 const wishlistRouter = require('./Routes/wishlist');
 const paymentRouter = require('./Routes/payment');
-
-
+const aiRouter = require('./Routes/ai');
+const reviewRouter = require('./Routes/review');
+const ordersRouter = require('./Routes/orders');
 
 app.use('/admin', adminRouter);
 app.use('/user', userRouter);   
@@ -23,12 +24,14 @@ app.use('/products', productRouter);
 app.use('/cart', cartRouter);
 app.use('/wishlist', wishlistRouter);
 app.use('/payment', paymentRouter);
+app.use('/ai', aiRouter);
+app.use('/review', reviewRouter);
+app.use('/orders', ordersRouter);
 
 async function main(){
     await mongoose.connect(process.env.MONGO_URL);
 
-    app.listen(3000, () => console.log('Server is running'));
+    app.listen(8000, () => console.log('Server is running'));
 }
-
 
 main();

@@ -1,0 +1,485 @@
+2025-04-28T11:25:29.460Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 3000
+}
+2025-04-28T11:25:41.300Z - Error fetching admin orders: {}
+2025-04-28T11:25:41.366Z - Error fetching admin orders: {}
+2025-04-28T11:25:42.400Z - Error fetching admin orders: {}
+2025-04-28T11:25:42.455Z - Error fetching admin orders: {}
+2025-04-28T11:25:44.477Z - Error fetching admin orders: {}
+2025-04-28T11:25:44.532Z - Error fetching admin orders: {}
+2025-04-28T11:25:49.829Z - Error fetching admin orders: {}
+2025-04-28T11:25:50.920Z - Error fetching admin orders: {}
+2025-04-28T11:25:52.982Z - Error fetching admin orders: {}
+2025-04-28T11:26:25.365Z - Error fetching admin orders: {}
+2025-04-28T11:26:26.466Z - Error fetching admin orders: {}
+2025-04-28T11:26:28.556Z - Error fetching admin orders: {}
+2025-04-28T11:26:43.302Z - Error fetching admin orders: {}
+2025-04-28T11:26:43.363Z - Error fetching admin orders: {}
+2025-04-28T11:26:44.398Z - Error fetching admin orders: {}
+2025-04-28T11:26:44.452Z - Error fetching admin orders: {}
+2025-04-28T11:26:46.485Z - Error fetching admin orders: {}
+2025-04-28T11:26:46.540Z - Error fetching admin orders: {}
+2025-04-28T11:29:57.815Z - Error fetching admin orders: {}
+2025-04-28T11:29:57.883Z - Error fetching admin orders: {}
+2025-04-28T11:29:58.921Z - Error fetching admin orders: {}
+2025-04-28T11:29:58.982Z - Error fetching admin orders: {}
+2025-04-28T11:30:00.998Z - Error fetching admin orders: {}
+2025-04-28T11:30:01.050Z - Error fetching admin orders: {}
+2025-04-28T11:31:22.112Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:22.113Z - Error fetching admin orders: {}
+2025-04-28T11:31:22.113Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:22.247Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:22.248Z - Error fetching admin orders: {}
+2025-04-28T11:31:22.248Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:23.206Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:23.206Z - Error fetching admin orders: {}
+2025-04-28T11:31:23.207Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:23.321Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:23.321Z - Error fetching admin orders: {}
+2025-04-28T11:31:23.321Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:25.341Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:25.341Z - Error fetching admin orders: {}
+2025-04-28T11:31:25.341Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:25.395Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:25.395Z - Error fetching admin orders: {}
+2025-04-28T11:31:25.395Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:27.147Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:27.148Z - Error fetching admin orders: {}
+2025-04-28T11:31:27.148Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:28.252Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:28.252Z - Error fetching admin orders: {}
+2025-04-28T11:31:28.252Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:31:30.341Z - Error in purchaseModel.find(): {}
+2025-04-28T11:31:30.342Z - Error fetching admin orders: {}
+2025-04-28T11:31:30.342Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:33:27.146Z - Error in purchaseModel.find(): {}
+2025-04-28T11:33:27.147Z - Error fetching admin orders: {}
+2025-04-28T11:33:27.147Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:45:57.797Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 3000
+}
+2025-04-28T11:46:37.491Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 3001
+}
+2025-04-28T11:47:54.030Z - Error in purchaseModel.find(): {}
+2025-04-28T11:47:54.030Z - Error fetching admin orders: {}
+2025-04-28T11:47:54.030Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:47:54.637Z - Error in purchaseModel.find(): {}
+2025-04-28T11:47:54.637Z - Error fetching admin orders: {}
+2025-04-28T11:47:54.638Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:50:12.202Z - Error in purchaseModel.find(): {}
+2025-04-28T11:50:12.203Z - Error fetching admin orders: {}
+2025-04-28T11:50:12.203Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:50:55.179Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 8000
+}
+2025-04-28T11:51:13.219Z - Error in purchaseModel.find(): {}
+2025-04-28T11:51:13.220Z - Error fetching admin orders: {}
+2025-04-28T11:51:13.220Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:52:32.634Z - Failed to start server: {
+  "message": "Server selection timed out after 30000 ms",
+  "errorLabelSet": {},
+  "reason": {
+    "type": "ReplicaSetNoPrimary",
+    "servers": {
+      "cluster0-shard-00-01.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "type": "Unknown",
+        "hosts": [],
+        "passives": [],
+        "arbiters": [],
+        "tags": {},
+        "minWireVersion": 0,
+        "maxWireVersion": 0,
+        "roundTripTime": -1,
+        "minRoundTripTime": 0,
+        "lastUpdateTime": 14566539,
+        "lastWriteDate": 0,
+        "error": null,
+        "topologyVersion": null,
+        "setName": null,
+        "setVersion": null,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": null,
+        "maxMessageSizeBytes": null,
+        "maxWriteBatchSize": null,
+        "maxBsonObjectSize": null,
+        "primary": null,
+        "me": null,
+        "$clusterTime": null,
+        "iscryptd": false
+      },
+      "cluster0-shard-00-02.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-02.uzofs.mongodb.net:27017",
+        "type": "RSSecondary",
+        "hosts": [
+          "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-02.uzofs.mongodb.net:27017"
+        ],
+        "passives": [],
+        "arbiters": [],
+        "tags": {
+          "diskState": "READY",
+          "nodeType": "ELECTABLE",
+          "region": "AP_SOUTH_1",
+          "workloadType": "OPERATIONAL",
+          "availabilityZone": "aps1-az2",
+          "provider": "AWS"
+        },
+        "minWireVersion": 0,
+        "maxWireVersion": 25,
+        "roundTripTime": 213,
+        "minRoundTripTime": 86,
+        "lastUpdateTime": 14588135,
+        "lastWriteDate": {
+          "$date": "2025-04-28T11:52:24Z"
+        },
+        "error": null,
+        "topologyVersion": {
+          "processId": {
+            "$oid": "680ca7af5926664a2c9dd554"
+          },
+          "counter": 3
+        },
+        "setName": "atlas-4ihikj-shard-0",
+        "setVersion": 242,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": 30,
+        "maxMessageSizeBytes": 48000000,
+        "maxWriteBatchSize": 100000,
+        "maxBsonObjectSize": 16777216,
+        "primary": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "me": "cluster0-shard-00-02.uzofs.mongodb.net:27017",
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1745841144,
+              "i": 2
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "GDSwmTo6o0aKMop1tl1OWHyB8i4=",
+                "subType": "00"
+              }
+            },
+            "keyId": 7445657258832167000
+          }
+        },
+        "iscryptd": false
+      },
+      "cluster0-shard-00-00.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+        "type": "RSSecondary",
+        "hosts": [
+          "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-02.uzofs.mongodb.net:27017"
+        ],
+        "passives": [],
+        "arbiters": [],
+        "tags": {
+          "nodeType": "ELECTABLE",
+          "workloadType": "OPERATIONAL",
+          "diskState": "READY",
+          "availabilityZone": "aps1-az1",
+          "provider": "AWS",
+          "region": "AP_SOUTH_1"
+        },
+        "minWireVersion": 0,
+        "maxWireVersion": 25,
+        "roundTripTime": 265.3333333333333,
+        "minRoundTripTime": 191,
+        "lastUpdateTime": 14588210,
+        "lastWriteDate": {
+          "$date": "2025-04-28T11:52:24Z"
+        },
+        "error": null,
+        "topologyVersion": {
+          "processId": {
+            "$oid": "680ca68170f3224ad21d115a"
+          },
+          "counter": 4
+        },
+        "setName": "atlas-4ihikj-shard-0",
+        "setVersion": 242,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": 30,
+        "maxMessageSizeBytes": 48000000,
+        "maxWriteBatchSize": 100000,
+        "maxBsonObjectSize": 16777216,
+        "primary": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "me": "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1745841144,
+              "i": 5
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "GDSwmTo6o0aKMop1tl1OWHyB8i4=",
+                "subType": "00"
+              }
+            },
+            "keyId": 7445657258832167000
+          }
+        },
+        "iscryptd": false
+      }
+    },
+    "stale": false,
+    "compatible": true,
+    "heartbeatFrequencyMS": 10000,
+    "localThresholdMS": 15,
+    "setName": "atlas-4ihikj-shard-0",
+    "maxElectionId": null,
+    "maxSetVersion": null,
+    "commonWireVersion": 0,
+    "logicalSessionTimeoutMinutes": 30
+  }
+}
+2025-04-28T11:53:04.969Z - Error in purchaseModel.find(): {}
+2025-04-28T11:53:04.969Z - Error fetching admin orders: {}
+2025-04-28T11:53:04.969Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:53:11.290Z - Error in purchaseModel.find(): {}
+2025-04-28T11:53:11.290Z - Error fetching admin orders: {}
+2025-04-28T11:53:11.290Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:53:11.355Z - Error in purchaseModel.find(): {}
+2025-04-28T11:53:11.355Z - Error fetching admin orders: {}
+2025-04-28T11:53:11.355Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:55:52.741Z - Error in purchaseModel.find(): {}
+2025-04-28T11:55:52.742Z - Error fetching admin orders: {}
+2025-04-28T11:55:52.742Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:55:52.797Z - Error in purchaseModel.find(): {}
+2025-04-28T11:55:52.797Z - Error fetching admin orders: {}
+2025-04-28T11:55:52.797Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:56:08.519Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:56:09.665Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:56:11.864Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:57:05.683Z - Error in purchaseModel.find(): {}
+2025-04-28T11:57:05.683Z - Error fetching admin orders: {}
+2025-04-28T11:57:05.683Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:57:05.746Z - Error in purchaseModel.find(): {}
+2025-04-28T11:57:05.746Z - Error fetching admin orders: {}
+2025-04-28T11:57:05.746Z - Full error object: {"stack":"MissingSchemaError: Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)\n    at NativeConnection.model (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/connection.js:1491:13)\n    at _getModelFromConn (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:579:15)\n    at addModelNamesToMap (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:507:17)\n    at getModelsMapForPopulate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/helpers/populate/getModelsMapForPopulate.js:208:7)\n    at _populatePath (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4446:21)\n    at Function.populate (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/model.js:4413:21)\n    at model.Query._find (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:2403:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)\n    at async model.Query.exec (/home/nitiraj/Minor/Backend/node_modules/mongoose/lib/query.js:4456:63)\n    at async /home/nitiraj/Minor/Backend/Routes/admin.js:133:28","message":"Schema hasn't been registered for model \"Product\".\nUse mongoose.model(name, schema)"}
+2025-04-28T11:58:12.819Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:58:13.943Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:58:16.052Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:58:19.423Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:58:20.553Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T11:58:22.668Z - Error updating order status: Schema hasn't been registered for model "Product".
+Use mongoose.model(name, schema)
+2025-04-28T12:03:31.400Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 8000
+}
+2025-04-28T12:43:01.010Z - Uncaught Exception: {
+  "code": "EADDRINUSE",
+  "errno": -98,
+  "syscall": "listen",
+  "address": "::",
+  "port": 8000
+}
+2025-04-28T12:55:30.139Z - Error with Gemini API: {
+  "status": 404,
+  "statusText": "Not Found"
+}
+2025-04-28T13:00:06.061Z - Failed to start server: {
+  "message": "Server selection timed out after 30000 ms",
+  "errorLabelSet": {},
+  "reason": {
+    "type": "ReplicaSetNoPrimary",
+    "servers": {
+      "cluster0-shard-00-00.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+        "type": "RSSecondary",
+        "hosts": [
+          "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-02.uzofs.mongodb.net:27017"
+        ],
+        "passives": [],
+        "arbiters": [],
+        "tags": {
+          "region": "AP_SOUTH_1",
+          "nodeType": "ELECTABLE",
+          "diskState": "READY",
+          "provider": "AWS",
+          "availabilityZone": "aps1-az1",
+          "workloadType": "OPERATIONAL"
+        },
+        "minWireVersion": 0,
+        "maxWireVersion": 25,
+        "roundTripTime": 103.33333333333333,
+        "minRoundTripTime": 49,
+        "lastUpdateTime": 534652,
+        "lastWriteDate": {
+          "$date": "2025-04-28T12:59:57Z"
+        },
+        "error": null,
+        "topologyVersion": {
+          "processId": {
+            "$oid": "680ca68170f3224ad21d115a"
+          },
+          "counter": 4
+        },
+        "setName": "atlas-4ihikj-shard-0",
+        "setVersion": 242,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": 30,
+        "maxMessageSizeBytes": 48000000,
+        "maxWriteBatchSize": 100000,
+        "maxBsonObjectSize": 16777216,
+        "primary": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "me": "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1745845197,
+              "i": 4
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "V1ODtjthACE3MlEgXgwzDR4hZPA=",
+                "subType": "00"
+              }
+            },
+            "keyId": 7445657258832167000
+          }
+        },
+        "iscryptd": false
+      },
+      "cluster0-shard-00-01.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "type": "Unknown",
+        "hosts": [],
+        "passives": [],
+        "arbiters": [],
+        "tags": {},
+        "minWireVersion": 0,
+        "maxWireVersion": 0,
+        "roundTripTime": -1,
+        "minRoundTripTime": 0,
+        "lastUpdateTime": 513043,
+        "lastWriteDate": 0,
+        "error": null,
+        "topologyVersion": null,
+        "setName": null,
+        "setVersion": null,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": null,
+        "maxMessageSizeBytes": null,
+        "maxWriteBatchSize": null,
+        "maxBsonObjectSize": null,
+        "primary": null,
+        "me": null,
+        "$clusterTime": null,
+        "iscryptd": false
+      },
+      "cluster0-shard-00-02.uzofs.mongodb.net:27017": {
+        "address": "cluster0-shard-00-02.uzofs.mongodb.net:27017",
+        "type": "RSSecondary",
+        "hosts": [
+          "cluster0-shard-00-00.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+          "cluster0-shard-00-02.uzofs.mongodb.net:27017"
+        ],
+        "passives": [],
+        "arbiters": [],
+        "tags": {
+          "diskState": "READY",
+          "nodeType": "ELECTABLE",
+          "provider": "AWS",
+          "workloadType": "OPERATIONAL",
+          "availabilityZone": "aps1-az2",
+          "region": "AP_SOUTH_1"
+        },
+        "minWireVersion": 0,
+        "maxWireVersion": 25,
+        "roundTripTime": 112,
+        "minRoundTripTime": 54,
+        "lastUpdateTime": 534653,
+        "lastWriteDate": {
+          "$date": "2025-04-28T12:59:57Z"
+        },
+        "error": null,
+        "topologyVersion": {
+          "processId": {
+            "$oid": "680ca7af5926664a2c9dd554"
+          },
+          "counter": 3
+        },
+        "setName": "atlas-4ihikj-shard-0",
+        "setVersion": 242,
+        "electionId": null,
+        "logicalSessionTimeoutMinutes": 30,
+        "maxMessageSizeBytes": 48000000,
+        "maxWriteBatchSize": 100000,
+        "maxBsonObjectSize": 16777216,
+        "primary": "cluster0-shard-00-01.uzofs.mongodb.net:27017",
+        "me": "cluster0-shard-00-02.uzofs.mongodb.net:27017",
+        "$clusterTime": {
+          "clusterTime": {
+            "$timestamp": {
+              "t": 1745845197,
+              "i": 4
+            }
+          },
+          "signature": {
+            "hash": {
+              "$binary": {
+                "base64": "V1ODtjthACE3MlEgXgwzDR4hZPA=",
+                "subType": "00"
+              }
+            },
+            "keyId": 7445657258832167000
+          }
+        },
+        "iscryptd": false
+      }
+    },
+    "stale": false,
+    "compatible": true,
+    "heartbeatFrequencyMS": 10000,
+    "localThresholdMS": 15,
+    "setName": "atlas-4ihikj-shard-0",
+    "maxElectionId": null,
+    "maxSetVersion": null,
+    "commonWireVersion": 0,
+    "logicalSessionTimeoutMinutes": 30
+  }
+}
