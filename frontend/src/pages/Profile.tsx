@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { getUserProfile, updateUserProfile, updatePassword, deleteAddress as apiDeleteAddress } from '../api/user';
-import { getOrders } from '../api/orders';
+import { getUserOrders } from '../api/orders';
 import { User, Order, Address } from '../types';
 import { 
   UserIcon, 
@@ -57,7 +57,7 @@ const Profile: React.FC = () => {
       });
 
       if (activeTab === 'orders') {
-        const ordersData = await getOrders();
+        const ordersData = await getUserOrders();
         setOrders(ordersData);
       }
     } catch (error) {
@@ -71,7 +71,7 @@ const Profile: React.FC = () => {
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const ordersData = await getOrders();
+      const ordersData = await getUserOrders();
       setOrders(ordersData);
     } catch (error) {
       console.error('Error fetching orders:', error);

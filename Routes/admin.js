@@ -147,11 +147,71 @@ router.delete("/delete-product/:id", authenticateAdmin, async (req, res) => {
 
 router.get("/orders", authenticateAdmin, async (req, res) => {
     try {
-        const orders = await purchaseModel.find()
-            .populate('userId', 'name email')
-            .populate('products.productId');
-        res.json(orders);
+        // Aggregate to join purchases with users and filter out any orders
+        // where the user no longer exists
+        const orders = await purchaseModel.aggregate([
+            {
+                $lookup: {
+                    from: "users", // The users collection
+                    localField: "userId",
+                    foreignField: "_id",
+                    as: "userInfo"
+                }
+            },
+            {
+                $match: {
+                    "userInfo": { $ne: [] } // Only keep orders where user exists
+                }
+            },
+            {
+                $project: {
+                    "userInfo.password": 0 // Remove sensitive user data
+                }
+            }
+        ]);
+        
+        // Manually populate products since aggregate doesn't do this automatically
+        const populatedOrders = await Promise.all(
+            orders.map(async (order) => {
+                // Transform user info from array to object
+                const user = order.userInfo[0];
+                order.userId = {
+                    _id: user._id,
+                    name: user.name,
+                    email: user.email
+                };
+                delete order.userInfo;
+                
+                // Populate products
+                if (order.products && order.products.length > 0) {
+                    const populatedProducts = await Promise.all(
+                        order.products.map(async (product) => {
+                            const productData = await productModel.findById(product.productId);
+                            return {
+                                ...product,
+                                productId: productData || { name: "Product not available" }
+                            };
+                        })
+                    );
+                    order.products = populatedProducts;
+                }
+                
+                return order;
+            })
+        );
+            
+        // Remove potential duplicates by order ID
+        const uniqueOrderIds = new Set();
+        const uniqueOrders = populatedOrders.filter(order => {
+            const orderId = order._id.toString();
+            const isDuplicate = uniqueOrderIds.has(orderId);
+            uniqueOrderIds.add(orderId);
+            return !isDuplicate;
+        });
+        
+        res.json(uniqueOrders);
     } catch (error) {
+        console.error("Error fetching admin orders:", error);
         res.status(500).json({ error: error.message });
     }
 });

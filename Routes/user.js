@@ -82,6 +82,24 @@ router.post("/purchase", authenticateUser, async (req, res) => {
         product.stock -= quantity;
         await purchase.save();
         await product.save();
+        
+        // Find the user and check if the order already exists
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+
+        // Check if the purchase is already in the user's orders
+        if (!user.orders) {
+            user.orders = [];
+        }
+        
+        // Only add to orders array if it doesn't already exist
+        if (!user.orders.includes(purchase._id)) {
+            user.orders.push(purchase._id);
+            await user.save();
+        }
+        
         res.status(201).json({ message: "Purchase successful", purchase });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -91,12 +109,37 @@ router.post("/purchase", authenticateUser, async (req, res) => {
 router.get("/purchases", authenticateUser, async (req, res) => {
     try {
         const userId = req.user.id;
-        const purchases = await purchaseModel.find({ userId }).populate('productId');
-
-        if (purchases.length === 0) return res.status(200).json({ message: "No purchases found", purchases: [] });
-
-        res.status(200).json(purchases);
+        
+        // Get the user with populated orders
+        const user = await userModel.findById(userId)
+            .populate({
+                path: 'orders',
+                populate: {
+                    path: 'products.productId',
+                    model: 'Product'
+                }
+            })
+            .select('-password');
+        
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        if (!user.orders || user.orders.length === 0) {
+            return res.status(200).json({ message: "No purchases found", purchases: [] });
+        }
+        
+        // Remove duplicate orders by using Set with order IDs
+        const uniqueOrderIds = new Set();
+        const uniqueOrders = user.orders.filter(order => {
+            const isDuplicate = uniqueOrderIds.has(order._id.toString());
+            uniqueOrderIds.add(order._id.toString());
+            return !isDuplicate;
+        });
+        
+        res.status(200).json(uniqueOrders);
     } catch (error) {
+        console.error('Error fetching purchases:', error);
         res.status(500).json({ error: error.message });
     }
 });

@@ -141,11 +141,15 @@ const OrderItem: React.FC<OrderItemProps> = ({ order }) => {
           {/* Shipping Address */}
           <div className="mb-4">
             <h4 className="text-sm font-medium mb-2">Shipping Address</h4>
-            <div className="text-sm text-gray-600">
-              <p>{order.shippingAddress.address}</p>
-              <p>{order.shippingAddress.city}, {order.shippingAddress.state}, {order.shippingAddress.pincode}</p>
-              <p>{order.shippingAddress.country}</p>
-            </div>
+            {order.shippingAddress ? (
+              <div className="text-sm text-gray-600">
+                <p>{order.shippingAddress.address}</p>
+                <p>{order.shippingAddress.city}, {order.shippingAddress.state}, {order.shippingAddress.pincode}</p>
+                <p>{order.shippingAddress.country}</p>
+              </div>
+            ) : (
+              <p className="text-sm text-gray-500">No shipping address available</p>
+            )}
           </div>
 
           {/* Tracking Information */}

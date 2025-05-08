@@ -45,6 +45,15 @@ router.post('/place-order', authenticateUser, async (req, res) => {
         // Calculate total amount
         const totalAmount = products.reduce((total, item) => total + (item.price * item.quantity), 0);
 
+        // Make sure we have a shipping address
+        const orderShippingAddress = shippingAddress || {
+            address: 'N/A',
+            city: 'N/A',
+            state: 'N/A',
+            pincode: 0,
+            country: 'N/A'
+        };
+
         // Create purchase record
         const purchase = new purchaseModel({
             userId,
@@ -53,15 +62,27 @@ router.post('/place-order', authenticateUser, async (req, res) => {
             paymentMethod,
             paymentStatus: 'Pending',
             status: 'Pending',
-            shippingAddress
+            shippingAddress: orderShippingAddress
         });
         
         await purchase.save();
 
-        // Update user's orders
-        await userModel.findByIdAndUpdate(userId, {
-            $push: { orders: purchase._id }
-        });
+        // Find the user and check if the order already exists
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        // Check if the purchase is already in the user's orders
+        if (!user.orders) {
+            user.orders = [];
+        }
+        
+        // Only add to orders array if it doesn't already exist
+        if (!user.orders.includes(purchase._id)) {
+            user.orders.push(purchase._id);
+            await user.save();
+        }
 
         // Clear cart
         cart.items = [];
@@ -95,6 +116,18 @@ router.get('/order/:orderId', authenticateUser, async (req, res) => {
 
         if (!purchase) {
             return res.status(404).json({ error: 'Order not found' });
+        }
+
+        // Ensure the purchase has a shipping address
+        if (!purchase.shippingAddress) {
+            purchase.shippingAddress = {
+                address: 'N/A',
+                city: 'N/A',
+                state: 'N/A',
+                pincode: 0,
+                country: 'N/A'
+            };
+            await purchase.save();
         }
 
         res.status(200).json({ purchase });
@@ -280,7 +313,29 @@ router.get('/orders', authenticateUser, async (req, res) => {
             .populate('products.productId')
             .sort({ orderDate: -1 });
             
-        res.status(200).json(orders);
+        // Add a default shipping address for orders that might be missing it
+        const fixedOrders = orders.map(order => {
+            if (!order.shippingAddress) {
+                order.shippingAddress = {
+                    address: 'N/A',
+                    city: 'N/A',
+                    state: 'N/A',
+                    pincode: 0,
+                    country: 'N/A'
+                };
+            }
+            return order;
+        });
+        
+        // Remove potential duplicates by order ID
+        const uniqueOrderIds = new Set();
+        const uniqueOrders = fixedOrders.filter(order => {
+            const isDuplicate = uniqueOrderIds.has(order._id.toString());
+            uniqueOrderIds.add(order._id.toString());
+            return !isDuplicate;
+        });
+            
+        res.status(200).json(uniqueOrders);
     } catch (error) {
         console.error('Error fetching orders:', error);
         res.status(500).json({ error: error.message });
