@@ -93,10 +93,14 @@ ${formattedProducts}
 First, provide a helpful response addressing their needs. 
 Then, recommend up to 3 most relevant products from the inventory that match their requirements.
 For each recommendation, include a brief explanation of why it's a good match.
-Format your product recommendations in JSON at the end of your response, like:
-RECOMMENDATIONS: [{"id": "product_id_1"}, {"id": "product_id_2"}, {"id": "product_id_3"}]
 
-Only recommend products from the inventory I provided. Do not make up any products.`;
+IMPORTANT: Format your response in two parts:
+1. A natural, conversational response explaining your recommendations
+2. At the very end, add a JSON array of recommended product IDs and reasons, like this:
+RECOMMENDATIONS: [{"id": "product_id_1", "reason": "Brief explanation"}, {"id": "product_id_2", "reason": "Brief explanation"}]
+
+Only recommend products from the inventory I provided. Do not make up any products.
+Make sure your main response is conversational and natural, not in JSON format.`;
 
     // Generate response from Gemini
     const result = await model.generateContent(prompt);
@@ -118,10 +122,24 @@ Only recommend products from the inventory I provided. Do not make up any produc
     // Filter for the recommended products from our available products
     const recommendedProducts = availableProducts.filter(product => 
       recommendedProductIds.includes(product._id)
-    );
+    ).map(product => ({
+      _id: product._id,
+      name: product.name,
+      brand: product.brand,
+      type: product.type,
+      price: product.price,
+      stock: product.stock,
+      image: product.image,
+      description: product.description,
+      category: product.category,
+      sspecs: product.sspecs
+    }));
     
-    // Clean up the response to remove the JSON part
-    const cleanResponse = response.replace(/RECOMMENDATIONS:\s*(\[.*?\])/s, '').trim();
+    // Clean up the response to remove the JSON part and any extra whitespace
+    const cleanResponse = response
+      .replace(/RECOMMENDATIONS:\s*(\[.*?\])/s, '')
+      .replace(/\n\s*\n/g, '\n')
+      .trim();
     
     res.json({
       answer: cleanResponse,

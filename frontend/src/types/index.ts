@@ -71,14 +71,47 @@ export interface OrderItem {
   price: number;
 }
 
+export interface Address {
+  _id?: string;
+  address: string;
+  city: string;
+  state: string;
+  pincode: number;
+  country: string;
+}
+
+export interface TrackingEvent {
+  status: string;
+  timestamp: string;
+  note: string;
+}
+
+export interface TrackingInfo {
+  orderId: string;
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
+  trackingId: string | null;
+  trackingUrl: string | null;
+  courierName: string | null;
+  orderDate: string;
+  shippedAt: string | null;
+  deliveredAt: string | null;
+  trackingHistory: TrackingEvent[];
+}
+
 export interface Order {
   _id: string;
   userId: string;
   products: OrderItem[];
   totalAmount: number;
-  status: 'Pending' | 'Shipped' | 'Delivered' | 'Cancelled';
+  status: 'Pending' | 'Processing' | 'Shipped' | 'Delivered' | 'Cancelled';
   paymentStatus: 'Pending' | 'Completed' | 'Failed';
   orderDate: string;
+  shippedAt?: string;
+  deliveredAt?: string;
+  trackingId?: string;
+  trackingUrl?: string;
+  courierName?: string;
+  trackingHistory?: TrackingEvent[];
   shippingAddress: {
     address: string;
     city: string;

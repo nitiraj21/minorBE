@@ -117,4 +117,161 @@ router.get("/profile", authenticateUser, async (req, res) => {
     }
 });
 
+// Update user profile information
+router.put("/profile", authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { name, email } = req.body;
+        
+        // Make sure we don't update the password this way
+        const updateData = {
+            ...(name && { name }),
+            ...(email && { email })
+        };
+        
+        // Check if email already exists (if updating email)
+        if (email) {
+            const existingUser = await userModel.findOne({ email, _id: { $ne: userId } });
+            if (existingUser) {
+                return res.status(400).json({ error: "Email already in use" });
+            }
+        }
+        
+        const updatedUser = await userModel.findByIdAndUpdate(
+            userId,
+            updateData,
+            { new: true }
+        ).select('-password');
+        
+        if (!updatedUser) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        res.status(200).json(updatedUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Update user password
+router.put("/password", authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { currentPassword, newPassword } = req.body;
+        
+        if (!currentPassword || !newPassword) {
+            return res.status(400).json({ error: "Current and new password are required" });
+        }
+        
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        // Verify current password
+        const isMatch = await bcrypt.compare(currentPassword, user.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: "Current password is incorrect" });
+        }
+        
+        // Hash new password
+        const hashed = await bcrypt.hash(newPassword, 10);
+        
+        // Update user password
+        user.password = hashed;
+        await user.save();
+        
+        res.status(200).json({ message: "Password updated successfully" });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Add a new address
+router.post("/address", authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { address, city, state, pincode, country } = req.body;
+        
+        if (!address || !city || !state || !pincode || !country) {
+            return res.status(400).json({ error: "All address fields are required" });
+        }
+        
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        // Add the new address
+        user.addresses.push({
+            address,
+            city,
+            state,
+            pincode,
+            country
+        });
+        
+        await user.save();
+        
+        res.status(201).json({ message: "Address added successfully", addresses: user.addresses });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Update an address
+router.put("/address/:addressId", authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { addressId } = req.params;
+        const { address, city, state, pincode, country } = req.body;
+        
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        // Find the address by its ID
+        const addressIndex = user.addresses.findIndex(addr => addr._id.toString() === addressId);
+        if (addressIndex === -1) {
+            return res.status(404).json({ error: "Address not found" });
+        }
+        
+        // Update the address fields
+        if (address) user.addresses[addressIndex].address = address;
+        if (city) user.addresses[addressIndex].city = city;
+        if (state) user.addresses[addressIndex].state = state;
+        if (pincode) user.addresses[addressIndex].pincode = pincode;
+        if (country) user.addresses[addressIndex].country = country;
+        
+        await user.save();
+        
+        res.status(200).json({ message: "Address updated successfully", addresses: user.addresses });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Delete an address
+router.delete("/address/:addressId", authenticateUser, async (req, res) => {
+    try {
+        const userId = req.user.id;
+        const { addressId } = req.params;
+        
+        const user = await userModel.findById(userId);
+        if (!user) {
+            return res.status(404).json({ error: "User not found" });
+        }
+        
+        // Filter out the address to be deleted
+        user.addresses = user.addresses.filter(addr => addr._id.toString() !== addressId);
+        
+        await user.save();
+        
+        res.status(200).json({ message: "Address deleted successfully", addresses: user.addresses });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 module.exports = router;

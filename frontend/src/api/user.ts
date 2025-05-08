@@ -1,12 +1,10 @@
 import api from './axios';
-import { ShippingAddress, User } from '../types';
+import { User, Address } from '../types';
 
+// Get user profile
 export const getUserProfile = async (): Promise<User> => {
   try {
     const response = await api.get('/user/profile');
-    if (!response.data) {
-      throw new Error('No user data received');
-    }
     return response.data;
   } catch (error) {
     console.error('Error fetching user profile:', error);
@@ -14,38 +12,66 @@ export const getUserProfile = async (): Promise<User> => {
   }
 };
 
-export const updateUserProfile = async (userData: Partial<User>): Promise<User> => {
+// Update user profile
+export const updateUserProfile = async (data: { name?: string; email?: string }): Promise<User> => {
   try {
-    const response = await api.put('/user/profile', userData);
+    const response = await api.put('/user/profile', data);
     return response.data;
   } catch (error) {
+    console.error('Error updating user profile:', error);
     throw error;
   }
 };
 
-export const addUserAddress = async (address: ShippingAddress): Promise<User> => {
+// Update user password
+export const updatePassword = async (
+  currentPassword: string,
+  newPassword: string
+): Promise<{ message: string }> => {
   try {
-    const response = await api.post('/user/addresses', address);
+    const response = await api.put('/user/password', {
+      currentPassword,
+      newPassword
+    });
     return response.data;
   } catch (error) {
+    console.error('Error updating password:', error);
     throw error;
   }
 };
 
-export const updateUserAddress = async (addressId: string, address: ShippingAddress): Promise<User> => {
+// Add a new address
+export const addAddress = async (address: Omit<Address, '_id'>): Promise<{ message: string; addresses: Address[] }> => {
   try {
-    const response = await api.put(`/user/addresses/${addressId}`, address);
+    const response = await api.post('/user/address', address);
     return response.data;
   } catch (error) {
+    console.error('Error adding address:', error);
     throw error;
   }
 };
 
-export const deleteUserAddress = async (addressId: string): Promise<User> => {
+// Update an address
+export const updateAddress = async (
+  addressId: string,
+  address: Partial<Omit<Address, '_id'>>
+): Promise<{ message: string; addresses: Address[] }> => {
   try {
-    const response = await api.delete(`/user/addresses/${addressId}`);
+    const response = await api.put(`/user/address/${addressId}`, address);
     return response.data;
   } catch (error) {
+    console.error('Error updating address:', error);
+    throw error;
+  }
+};
+
+// Delete an address
+export const deleteAddress = async (addressId: string): Promise<{ message: string; addresses: Address[] }> => {
+  try {
+    const response = await api.delete(`/user/address/${addressId}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error deleting address:', error);
     throw error;
   }
 };

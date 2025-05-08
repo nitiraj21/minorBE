@@ -1,5 +1,5 @@
 import api from './axios';
-import { Order } from '../types';
+import { Order, TrackingInfo } from '../types';
 import axios from 'axios';
 
 /**
@@ -134,12 +134,63 @@ export const createOrder = async (totalAmount: number, products: any[]): Promise
   }
 };
 
-export const getOrders = async (): Promise<Order[]> => {
-  const response = await api.get('/orders');
-  return response.data;
+export const getOrders = async (status?: string): Promise<Order[]> => {
+  try {
+    const query = status ? `?status=${status}` : '';
+    const response = await api.get(`/payment/orders${query}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error fetching orders:', error);
+    throw error;
+  }
 };
 
 export const getOrder = async (orderId: string): Promise<Order> => {
-  const response = await api.get(`/orders/${orderId}`);
-  return response.data;
+  try {
+    const response = await api.get(`/payment/order/${orderId}`);
+    return response.data.purchase;
+  } catch (error) {
+    console.error(`Error fetching order ${orderId}:`, error);
+    throw error;
+  }
+};
+
+export const placeOrder = async (
+  orderId: string,
+  paymentMethod: string,
+  shippingAddress: any
+): Promise<{ success: boolean; message: string; purchase: Order }> => {
+  try {
+    const response = await api.post('/payment/place-order', {
+      orderId,
+      paymentMethod,
+      shippingAddress
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error placing order:', error);
+    throw error;
+  }
+};
+
+export const cancelOrder = async (orderId: string): Promise<{ success: boolean; message: string; order: Order }> => {
+  try {
+    const response = await api.put(`/payment/order-status/${orderId}`, {
+      status: 'Cancelled'
+    });
+    return response.data;
+  } catch (error) {
+    console.error(`Error cancelling order ${orderId}:`, error);
+    throw error;
+  }
+};
+
+export const getTrackingInfo = async (orderId: string): Promise<TrackingInfo> => {
+  try {
+    const response = await api.get(`/payment/track/${orderId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error getting tracking info for order ${orderId}:`, error);
+    throw error;
+  }
 }; 

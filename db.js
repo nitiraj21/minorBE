@@ -55,9 +55,19 @@ const purchaseSchema = new Schema({
         price: { type: Number, required: true }
     }],
     totalAmount: { type: Number, required: true, default : 0 },
-    status: { type: String, enum: ["Pending", "Shipped", "Delivered", "Cancelled"], default: "Pending" },
+    status: { type: String, enum: ["Pending", "Processing", "Shipped", "Delivered", "Cancelled"], default: "Pending" },
     paymentStatus: { type: String, enum: ["Pending", "Completed", "Failed"], default: "Pending" },
     orderDate: { type: Date, default: Date.now },
+    shippedAt: { type: Date },
+    deliveredAt: { type: Date },
+    trackingId: { type: String },
+    trackingUrl: { type: String },
+    courierName: { type: String },
+    trackingHistory: [{
+        status: { type: String, required: true },
+        timestamp: { type: Date, default: Date.now },
+        note: { type: String }
+    }],
     shippingAddress: {
         address: { type: String },
         city: { type: String },

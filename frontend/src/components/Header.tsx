@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { ShoppingCartIcon, Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
+import { ShoppingCartIcon, Bars3Icon, XMarkIcon, UserIcon } from '@heroicons/react/24/outline';
 
 const Header: React.FC = () => {
   const { isAuthenticated, isAdmin, logout } = useAuth();
@@ -35,6 +35,9 @@ const Header: React.FC = () => {
               <Link to="/cart" className="nav-link relative text-light-text hover:text-secondary-color transition">
                 <ShoppingCartIcon className="h-6 w-6" />
                 {/* <span className="absolute -top-2 -right-2 bg-secondary-color text-primary-color rounded-full w-4 h-4 flex items-center justify-center text-xs font-bold">0</span> */}
+              </Link>
+              <Link to="/profile" className="nav-link text-light-text hover:text-secondary-color transition">
+                <UserIcon className="h-6 w-6" />
               </Link>
               {isAdmin && (
                 <Link to="/admin/dashboard" className="nav-link text-light-text hover:text-secondary-color transition">
@@ -98,6 +101,13 @@ const Header: React.FC = () => {
                   onClick={toggleMobileMenu}
                 >
                   Cart
+                </Link>
+                <Link
+                  to="/profile"
+                  className="block px-3 py-2 rounded text-light-text hover:bg-secondary-color/20 transition"
+                  onClick={toggleMobileMenu}
+                >
+                  My Profile
                 </Link>
                 {isAdmin && (
                   <Link

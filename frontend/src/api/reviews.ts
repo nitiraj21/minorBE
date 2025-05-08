@@ -1,4 +1,4 @@
-import axios from './axios';
+import api from './axios';
 
 export interface Review {
   _id: string;
@@ -18,25 +18,25 @@ export interface ReviewInput {
 }
 
 export const getProductReviews = async (productId: string): Promise<Review[]> => {
-  const response = await axios.get(`/review/product/${productId}`);
+  const response = await api.get(`/review/product/${productId}`);
   return response.data;
 };
 
 export const getUserReviews = async (): Promise<Review[]> => {
-  const response = await axios.get('/review/user');
+  const response = await api.get('/review/user');
   return response.data;
 };
 
 export const createReview = async (productId: string, review: ReviewInput): Promise<Review> => {
-  const response = await axios.post('/review', { productId, ...review });
+  const response = await api.post('/review', { productId, ...review });
   return response.data;
 };
 
 export const updateReview = async (reviewId: string, review: ReviewInput): Promise<Review> => {
-  const response = await axios.put(`/review/${reviewId}`, review);
+  const response = await api.put(`/review/${reviewId}`, review);
   return response.data;
 };
 
 export const deleteReview = async (reviewId: string): Promise<void> => {
-  await axios.delete(`/review/${reviewId}`);
+  await api.delete(`/review/${reviewId}`);
 }; 
