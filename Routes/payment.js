@@ -35,6 +35,11 @@ router.post('/place-order', authenticateUser, async (req, res) => {
             return res.status(404).json({ error: 'Cart not found' });
         }
 
+        // Check if cart is empty
+        if (!cart.items || cart.items.length === 0) {
+            return res.status(400).json({ error: 'Your cart is empty' });
+        }
+
         // Prepare products array with prices
         const products = cart.items.map(item => ({
             productId: item.productId,
@@ -53,6 +58,33 @@ router.post('/place-order', authenticateUser, async (req, res) => {
             pincode: 0,
             country: 'N/A'
         };
+
+        // Check for recent duplicate orders (orders in the last hour with same products and total)
+        const oneHourAgo = new Date(Date.now() - 60 * 60 * 1000);
+        const recentOrder = await purchaseModel.findOne({
+            userId,
+            totalAmount,
+            orderDate: { $gte: oneHourAgo },
+            'products.productId': { $all: products.map(p => p.productId._id) }
+        });
+
+        if (recentOrder) {
+            console.log('Duplicate order detected, returning existing order');
+            
+            // Clear cart since order already exists
+            cart.items = [];
+            await cart.save();
+            
+            // Get the populated purchase for response
+            const populatedPurchase = await purchaseModel.findById(recentOrder._id)
+                .populate('products.productId');
+                
+            return res.status(200).json({
+                success: true,
+                message: 'Order already exists',
+                purchase: populatedPurchase
+            });
+        }
 
         // Create purchase record
         const purchase = new purchaseModel({

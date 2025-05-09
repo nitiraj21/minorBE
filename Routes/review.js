@@ -2,25 +2,37 @@ const express = require('express');
 const router = express.Router();
 const { authenticateUser } = require('../AuthMiddleware/auth');
 const Review = require('../Models/review');
-const Product = require('../Models/product');
+const { productModel } = require('../db');
 
 // Submit a review
 router.post('/', authenticateUser, async (req, res) => {
   try {
     const { productId, rating, comment } = req.body;
-    // Use either id or _id, whichever is available
-    const userId = req.user._id || req.user.id;
+    
+    // Get userId from the decoded token
+    let userId;
+    if (req.user.id) {
+      userId = req.user.id;
+    } else if (req.user._id) {
+      userId = req.user._id;
+    } else {
+      console.error('No user ID found in token:', req.user);
+      return res.status(400).json({ error: 'Invalid user authentication' });
+    }
 
     console.log('Review submission attempt:', { 
       userId, 
       productId, 
       rating, 
-      comment,
-      user: req.user
+      comment
     });
 
+    if (!productId || !rating || !comment) {
+      return res.status(400).json({ error: 'Missing required fields: productId, rating, and comment are required' });
+    }
+
     // Check if product exists
-    const product = await Product.findById(productId);
+    const product = await productModel.findById(productId);
     if (!product) {
       console.log('Product not found:', productId);
       return res.status(404).json({ error: 'Product not found' });
@@ -30,30 +42,39 @@ router.post('/', authenticateUser, async (req, res) => {
     const existingReview = await Review.findOne({ user: userId, product: productId });
     if (existingReview) {
       console.log('User already reviewed this product:', { userId, productId });
-      return res.status(400).json({ error: 'You have already reviewed this product' });
+      return res.status(400).json({ error: 'You have already reviewed this product. Please edit your existing review instead.' });
     }
 
     // Create new review
     const review = new Review({
       user: userId,
       product: productId,
-      rating,
+      rating: Number(rating),
       comment
     });
 
-    const savedReview = await review.save();
-    console.log('Review saved successfully:', savedReview._id);
+    try {
+      const savedReview = await review.save();
+      console.log('Review saved successfully:', savedReview._id);
 
-    // Update product's average rating
-    const reviews = await Review.find({ product: productId });
-    const averageRating = reviews.reduce((acc, curr) => acc + curr.rating, 0) / reviews.length;
-    await Product.findByIdAndUpdate(productId, { averageRating });
-    console.log('Updated product average rating:', averageRating);
+      // Update product's average rating
+      const reviews = await Review.find({ product: productId });
+      const averageRating = reviews.reduce((acc, curr) => acc + curr.rating, 0) / reviews.length;
+      await productModel.findByIdAndUpdate(productId, { averageRating });
+      console.log('Updated product average rating:', averageRating);
 
-    res.status(201).json(savedReview);
+      res.status(201).json(savedReview);
+    } catch (saveError) {
+      // Check if it's a duplicate key error (user already reviewed this product)
+      if (saveError.code === 11000 || saveError.name === 'MongoError' && saveError.code === 11000) {
+        console.log('Duplicate review detected:', saveError);
+        return res.status(400).json({ error: 'You have already reviewed this product. Please edit your existing review instead.' });
+      }
+      throw saveError;
+    }
   } catch (error) {
     console.error('Error submitting review:', error);
-    res.status(500).json({ error: error.message });
+    res.status(500).json({ error: error.message || 'An unexpected error occurred while submitting your review' });
   }
 });
 
@@ -99,7 +120,7 @@ router.put('/:reviewId', authenticateUser, async (req, res) => {
     // Update product's average rating
     const reviews = await Review.find({ product: review.product });
     const averageRating = reviews.reduce((acc, curr) => acc + curr.rating, 0) / reviews.length;
-    await Product.findByIdAndUpdate(review.product, { averageRating });
+    await productModel.findByIdAndUpdate(review.product, { averageRating });
 
     res.json(review);
   } catch (error) {
@@ -130,7 +151,7 @@ router.delete('/:reviewId', authenticateUser, async (req, res) => {
     const averageRating = reviews.length > 0 
       ? reviews.reduce((acc, curr) => acc + curr.rating, 0) / reviews.length 
       : 0;
-    await Product.findByIdAndUpdate(review.product, { averageRating });
+    await productModel.findByIdAndUpdate(review.product, { averageRating });
 
     res.json({ message: 'Review deleted successfully' });
   } catch (error) {
